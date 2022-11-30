@@ -75,12 +75,62 @@ class AssetManager {
      */
   loadImages(images = {}, progressCallback = () => {}) {
     const loader = new Loader(config.root);
+    app.loader.baseURL = "assets";
+
 
     for (const [img, url] of Object.entries(images)) {
       loader.add(img, url);
     }
+    app.loader
+    .add("sprite01", "1.png")
+    .add("sprite02", "2.png")
+    .add("sprite03", "arrow.png")
+    .add("sprite04", "background.jpg")
+    .add("sprite05", "key-default.png")
+    .add("sprite06", "key-long.png")
+    .add("sprite07", "logo.png")
+    .add("sprite08", "ooo.png")
+    .add("sprite09", "path-1.svg")
+    .add("sprite10", "path-2.svg")
+    .add("sprite11", "path-3.svg")
+    .add("sprite12", "path-4.svg")
+    .add("sprite13", "path-5.svg")
+    .add("sprite14", "path-6.svg")
+    .add("sprite15", "path-7.svg")
+    .add("sprite16", "path-8.svg")
+    .add("sprite17", "path-9.svg")
+    .add("sprite18", "path-10.svg")
+    .add("sprite19", "planet-1.png")
+    .add("sprite20", "planet-2.png")
+    .add("sprite21", "planet-3.png")
+    .add("sprite22", "planet-4.png")
+    .add("sprite23", "play-scene.png")
+    .add("sprite24", "rocket.png")
+    .add("sprite25", "rover.png")
+    .add("sprite26", "rover-health-bar.png")
+    .add("sprite27", "rover-shadow.png")
+    .add("sprite28", "shield-active.png")
+    .add("sprite29", "shield-inactive.png")
+    .add("sprite30", "star.png")
+    .add("sprite31", "wins.png");
 
     loader.onProgress.add(() => progressCallback(loader.progress));
+    app.loader.onProgress(showProgress);
+    app.loader.onComplete(doneLoading);
+    app.loader.onError.add(reportError);
+
+    app.loader.load();
+
+    function showProgress(e){
+        console.log(e.progress);
+    }
+    function reportError(e){
+        console.log("Error: " + e.message);
+    }
+    function doneLoading(e){
+        console.log("Done Loading!");
+    }
+
 
     return new Promise(loader.load.bind(loader));
   }
