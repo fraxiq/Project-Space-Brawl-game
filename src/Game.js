@@ -1,7 +1,7 @@
-import Splash from './scenes/Splash';
-import Play from './scenes/Play';
-import { Container } from 'pixi.js';
-import Tutorial from './scenes/Tutorial';
+import Splash from "./scenes/Splash";
+import Play from "./scenes/Play";
+import { Container } from "pixi.js";
+import Tutorial from "./scenes/Tutorial";
 
 /**
  * Main game stage, manages scenes/levels.
@@ -9,15 +9,14 @@ import Tutorial from './scenes/Tutorial';
  * @extends {PIXI.Container}
  */
 export default class Game extends Container {
-
   static get events() {
     return {
-      SWITCH_SCENE: 'switch_scene'
+      SWITCH_SCENE: "switch_scene",
     };
   }
 
   /**
-   * @param {PIXI.Sprite} background 
+   * @param {PIXI.Sprite} background
    */
   constructor({ background } = {}) {
     super();
@@ -26,19 +25,23 @@ export default class Game extends Container {
     this.currentScene = null;
   }
 
+  // haven't figured out scene swapping completely yet this needs work
   async start() {
-    await this.switchScene(Splash, { scene: 'splash' });
+    await this.switchScene(Splash, { scene: "splash" });
     await this.currentScene.finish;
 
-    await this.switchScene(Play, { scene: 'play' });
+    
+    await this.switchScene(Tutorial, {scene: "tutorual"});
     await this.currentScene.finish;
+    
+    // await this.switchScene(Play, { scene: "play" });
+    // await this.currentScene.finish;
 
-   this.switchScene(Tutorial);
   }
 
   /**
-   * @param {Function} constructor 
-   * @param {String} scene 
+   * @param {Function} constructor
+   * @param {String} scene
    */
   switchScene(constructor, scene) {
     this.removeChild(this.currentScene);
@@ -49,7 +52,6 @@ export default class Game extends Container {
     this.emit(Game.events.SWITCH_SCENE, { scene });
 
     return this.currentScene.onCreated();
-
   }
 
   /**
