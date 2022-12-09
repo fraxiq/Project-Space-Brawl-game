@@ -2,21 +2,21 @@ import { Container, Rectangle, Sprite, Graphics, Texture, Text } from "pixi.js";
 import Scene from "./Scene";
 import gsap from "gsap";
 import Footer from "../components/Footer";
+import config from '../config';
 
 export default class Play extends Scene {
+
   async onCreated() {
-    console.log("playing");
     const footer = new Footer();
     footer.x = -window.innerWidth / 2;
     footer.y = window.innerHeight / 2 - footer.height;
     this.addChild(footer);
-
-    const rect = new PIXI.Graphics();
-    rect.beginFill(0xff0000);
-    rect.drawRect(100, 100, 200, 100);
-    this.addChild(rect);
   }
-  
+
+  get finish() {
+    return new Promise((res)=>setTimeout(res, 2000));
+  }
+
 
 
 
