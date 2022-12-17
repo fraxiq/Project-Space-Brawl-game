@@ -6,6 +6,7 @@ export function createExplosion(x, y) {
   let h = 192;
 
   const explosionFrames = [
+    new PIXI.Texture(ssheetTexture, new PIXI.Rectangle(3 * w - w, h * 2, w - 2, h)),
     new PIXI.Texture(ssheetTexture, new PIXI.Rectangle(1 * w - w, 0, w - 2, h)),
     new PIXI.Texture(ssheetTexture, new PIXI.Rectangle(2 * w - w, 0, w - 2, h)),
     new PIXI.Texture(ssheetTexture, new PIXI.Rectangle(3 * w - w, 0, w - 2, h)),
