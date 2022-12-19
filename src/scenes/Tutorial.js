@@ -1,5 +1,7 @@
 import Assets from "../core/AssetManager";
 import Scene from "./Scene";
+import { Ticker } from 'pixi.js';
+import gsap from "gsap";
 
 export default class Tutorial extends Scene {
   // TODO: Have to figure out how to call things from the preloader
