@@ -13,6 +13,7 @@ import Footer from "../components/Footer";
 import config from "../config";
 import Assets from "../core/AssetManager";
 import {createExplosion} from "../components/Explosion";
+import { apply } from "file-loader";
 
 export default class Play extends Scene {
   async onCreated() {
@@ -20,6 +21,9 @@ export default class Play extends Scene {
     footer.x = -window.innerWidth / 2;
     footer.y = window.innerHeight / 2 - footer.height;
     this.addChild(footer);
+
+
+    
   }
   
 
