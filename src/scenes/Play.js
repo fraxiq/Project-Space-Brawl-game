@@ -1,15 +1,34 @@
-import { Sprite } from 'pixi.js';
-import Scene from './Scene';
-import gsap from 'gsap';
-import Footer from '../components/Footer';
+import {
+  Container,
+  Rectangle,
+  Sprite,
+  Graphics,
+  Texture,
+  Text,
+  BaseTexture,
+} from "pixi.js";
+import Scene from "./Scene";
+import gsap from "gsap";
+import Footer from "../components/Footer";
+import config from "../config";
+import Assets from "../core/AssetManager";
+import {createExplosion} from "../components/Explosion";
+import { apply } from "file-loader";
 
 export default class Play extends Scene {
   async onCreated() {
-
     const footer = new Footer();
-    footer.x = - window.innerWidth / 2;
+    footer.x = -window.innerWidth / 2;
     footer.y = window.innerHeight / 2 - footer.height;
     this.addChild(footer);
+
+
+    
+  }
+  
+
+  get finish() {
+    return new Promise((res) => setTimeout(res, 2000));
   }
 
   /**
@@ -19,7 +38,7 @@ export default class Play extends Scene {
    * @param  {Number} width  Window width
    * @param  {Number} height Window height
    */
-  onResize(width, height) { // eslint-disable-line no-unused-vars
-
+  onResize(width, height) {
+    // eslint-disable-line no-unused-vars
   }
 }
