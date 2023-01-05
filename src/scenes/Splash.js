@@ -9,7 +9,7 @@ export default class Splash extends Scene {
 
     this.loadingText = new Text("0%", {
       fontSize: 75,
-      fill: 0xffc900,
+      fill: 0x0c4bfa,
     });
 
     this.config = config.scenes.Splash;
@@ -28,9 +28,12 @@ export default class Splash extends Scene {
     const images = {
       logo: Assets.images.logo,
     };
+
     const sounds = {};
 
-    return super.preload({ images, sounds });
+    const spritesheets = {};
+
+    return super.preload({ images, sounds, fonts: Assets.fonts, spritesheets });
   }
 
   onResize(width, height) {
