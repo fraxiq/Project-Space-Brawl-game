@@ -1,19 +1,6 @@
-import {
-  Container,
-  Rectangle,
-  Sprite,
-  Graphics,
-  Texture,
-  Text,
-  BaseTexture,
-} from "pixi.js";
-import Scene from "./Scene";
-import gsap from "gsap";
 import Footer from "../components/Footer";
-import config from "../config";
-import Assets from "../core/AssetManager";
-import {createExplosion} from "../components/Explosion";
-import { apply } from "file-loader";
+import Scene from "./Scene";
+import { BitmapText } from "pixi.js";
 
 export default class Play extends Scene {
   async onCreated() {
@@ -22,13 +9,13 @@ export default class Play extends Scene {
     footer.y = window.innerHeight / 2 - footer.height;
     this.addChild(footer);
 
+    const text = new BitmapText("Hello, PIXI", {
+      fontName: "Desyrel",
+    });
 
-    
-  }
-  
+    text.anchor.set(0.5);
 
-  get finish() {
-    return new Promise((res) => setTimeout(res, 2000));
+    this.addChild(text);
   }
 
   /**

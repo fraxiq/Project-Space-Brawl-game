@@ -22,6 +22,6 @@ export default {
     },
   },
   assets: {
-    root: '/',
+    root: "/",
   },
 };
