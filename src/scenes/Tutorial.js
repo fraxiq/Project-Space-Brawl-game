@@ -1,10 +1,17 @@
 import Assets from "../core/AssetManager";
 import Scene from "./Scene";
-import { Ticker } from 'pixi.js';
+import { Ticker } from "pixi.js";
 import gsap from "gsap";
+import { EventEmitter } from "eventemitter3";
+let lastSlideClicked = false;
 
 export default class Tutorial extends Scene {
   // TODO: Have to figure out how to call things from the preloader
+
+  constructor() {
+    super();
+  }
+
   preload() {
     const images = {};
     const sounds = {};
@@ -30,7 +37,6 @@ export default class Tutorial extends Scene {
 
     let currentSlide = new PIXI.Sprite.from(Assets._assets.Slide1);
     currentSlide.anchor.set(0.5);
-    console.log(this.background.width, this.background.height);
     currentSlide.height = 1060;
     currentSlide.y = 10;
 
@@ -53,17 +59,21 @@ export default class Tutorial extends Scene {
 
     rightArrow.on("pointerover", () => {
       pointerOver = true;
-      if(pointerOver){
-      rightArrow.alpha = 1;
+      if (pointerOver) {
+        rightArrow.alpha = 1;
       }
-    })
+    });
 
-    rightArrow.on("pointerout", ()=> {
+    rightArrow.on("pointerout", () => {
       pointerOver = false;
       rightArrow.alpha = 0.5;
-    })
+    });
 
     rightArrow.on("pointerdown", () => {
+      if (counter == Slides.length - 1) {
+        lastSlideClicked = true;
+      }
+
       if (counter < Slides.length - 1) {
         counter++;
         currentSlide.texture = Slides[counter].texture;
@@ -79,16 +89,15 @@ export default class Tutorial extends Scene {
 
     leftArrow.on("pointerover", () => {
       pointerOver = true;
-      if(pointerOver){
-      leftArrow.alpha = 1;
+      if (pointerOver) {
+        leftArrow.alpha = 1;
       }
-    })
+    });
 
-    leftArrow.on("pointerout", ()=> {
+    leftArrow.on("pointerout", () => {
       pointerOver = false;
       leftArrow.alpha = 0.5;
-    })
-
+    });
 
     leftArrow.on("pointerdown", () => {
       if (counter > 0) {
@@ -99,20 +108,21 @@ export default class Tutorial extends Scene {
           { x: 0.8, y: 0.8 },
           { x: 1, y: 1, duration: 0.7, ease: "power2.out" }
         );
-
         if (counter == 0) {
           currentSlide.texture = Slides[counter].texture;
           this.removeChild(leftArrow);
         }
       }
     });
+  }
 
-    function incOp(img) {
-      img.alpha += 0.01;
-    }
-
-    function decOp(img) {
-      img.alpha -= 0.01;
-    }
+  get finish() {
+    return new Promise((res) => {
+      setInterval(() => {
+        if (lastSlideClicked) {
+          res();
+        }
+      }, 200);
+    });
   }
 }
