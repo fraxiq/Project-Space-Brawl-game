@@ -1,10 +1,11 @@
 import Scene from './Scene';
 import AssetManager from './AssetManager';
-
+import Tutorial from './Tutorial';
 
 export default class LoadingScene extends Scene {
-    constructor() {
+    constructor(game) {
         super();
+        this.game = game;
         this.loadingText = new PIXI.Text("Loading...", {
             fontSize: 24,
             fill: 0xffffff
@@ -22,5 +23,10 @@ export default class LoadingScene extends Scene {
 
     onLoadProgress(progress) {
         this.loadingText.text = `Loading... ${progress}%`;
+    }
+
+    async onCreated() {
+        await super.onCreated();
+        this.game.switchScene(Tutorial); // Switch to the next scene (Tutorial)
     }
 }
