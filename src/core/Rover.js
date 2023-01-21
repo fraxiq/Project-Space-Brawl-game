@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import AssetManager from './AssetManager';
 
-class Rover {
+ export default class Rover {
     constructor(characterSprite, shieldSprites, health = 100) {
         this.characterSprite = new PIXI.Sprite(Assets.getImage('rover'));
         this.shieldSpriteActive = new PIXI.Sprite(Assets.getImage('shield-active'));
