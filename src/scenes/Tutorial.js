@@ -1,9 +1,11 @@
 import Assets from "../core/AssetManager";
 import Scene from "./Scene";
 import { Ticker } from "pixi.js";
-import gsap from "gsap";
+import {gsap, TweenMax} from "gsap";
 import { EventEmitter } from "eventemitter3";
+import { PixiPlugin } from "gsap/all";
 let lastSlideClicked = false;
+gsap.registerPlugin(PixiPlugin);
 
 export default class Tutorial extends Scene {
   // TODO: Have to figure out how to call things from the preloader
@@ -78,9 +80,7 @@ export default class Tutorial extends Scene {
         counter++;
         currentSlide.texture = Slides[counter].texture;
         gsap.fromTo(
-          currentSlide.scale,
-          { x: 0.8, y: 0.8 },
-          { x: 1, y: 1, duration: 0.7, ease: "power2.out" }
+          currentSlide, {pixi: {scaleX: 0.8, scaleY: 0.8, saturation: 0}}, {pixi: {duration: 1, scaleX: 1, scaleY: 1, saturation: 1.5}, duration:0.7, ease: "power2.out"}
         );
       }
 

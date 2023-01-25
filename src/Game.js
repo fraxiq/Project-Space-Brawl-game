@@ -32,11 +32,11 @@ export default class Game extends Container {
     await this.currentScene.finish;
 
     
-    await this.switchScene(Tutorial, { scene: "tutorual" });
-    await this.currentScene.finish;
+    // await this.switchScene(Tutorial, { scene: "tutorual" });
+    // await this.currentScene.finish;
     
-    await this.switchScene(Countdown, { scene: "countdown" });
-    await this.currentScene.finish;
+    // await this.switchScene(Countdown, { scene: "countdown" });
+    // await this.currentScene.finish;
     
     await this.switchScene(Play, { scene: "play" });
     await this.currentScene.finish;
